@@ -22,36 +22,38 @@ Explanation: The longest substrings with no more than '3' distinct characters ar
 
 */
 
-//mycode
-#include<String>
-#include<unordered_map>
+// mycode
+#include <String>
+#include <unordered_map>
 
-int longest_sub_string_with_K_distinct_char(str string, int k){
+int longest_sub_string_with_K_distinct_char(str string, int k)
+{
     int max_length = 0;
     int window_Start = 0;
     unordered_map<char, int> m;
 
     // in the following loop we'll try to extend the range [window_start, window_end]
-    for(int window_End= 0; window_End < str.length(); window_End++){
-        char right_char = str[window_End];
-        m[right_char]++ ;
+    for (int window_End = 0; window_End < str.length(); window_End++)
+    {
+        m[str[window_End]]++;
 
         // shrink the sliding window, until we are left with 'k' distinct characters in the char_frequency map
-        while((int)m.size() > k){
-            char left_char = str[window_Start];
-            m[left_char]-- ;
+        while ((int)m.size() > k)
+        {
+            m[str[window_Start]]--;
 
-            if(m[left_char] == 0){
-                m.erase(left_char);
+            if (m[str[window_Start]] == 0)
+            {
+                m.erase(str[window_Start]);
             }
-            window_Start++ //shrink the window
+            window_Start++ // shrink the window
         }
-        max_length = max(max_length, window_End - window_Start + 1); //remember the maximum length so far
+        max_length = max(max_length, window_End - window_Start + 1); // remember the maximum length so far
     }
     return max_length;
 };
 
-int main(){
-    cout<< "Length of Longest Substring: "<< longest_sub_string_with_K_distinct_char("araaci", 2)<< endl;
-
+int main()
+{
+    cout << "Length of Longest Substring: " << longest_sub_string_with_K_distinct_char("araaci", 2) << endl;
 }
