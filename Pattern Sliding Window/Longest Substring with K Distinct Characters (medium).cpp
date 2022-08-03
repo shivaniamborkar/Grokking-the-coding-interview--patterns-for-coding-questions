@@ -31,10 +31,12 @@ int longest_sub_string_with_K_distinct_char(str string, int k){
     int window_Start = 0;
     unordered_map<char, int> m;
 
+    // in the following loop we'll try to extend the range [window_start, window_end]
     for(int window_End= 0; window_End < str.length(); window_End++){
         char right_char = str[window_End];
         m[right_char]++ ;
 
+        // shrink the sliding window, until we are left with 'k' distinct characters in the char_frequency map
         while((int)m.size() > k){
             char left_char = str[window_Start];
             m[left_char]-- ;
@@ -44,7 +46,7 @@ int longest_sub_string_with_K_distinct_char(str string, int k){
             }
             window_Start++ //shrink the window
         }
-        max_length = max(max_length, window_End - window_Start + 1);
+        max_length = max(max_length, window_End - window_Start + 1); //remember the maximum length so far
     }
     return max_length;
 };
