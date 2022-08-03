@@ -42,7 +42,7 @@ int longest_sub_string_with_K_distinct_char(str string, int k){
             m[left_char]-- ;
 
             if(m[left_char] == 0){
-                m.erade(left_char);
+                m.erase(left_char);
             }
             window_Start++ //shrink the window
         }
